@@ -10,7 +10,7 @@ async function signup(req, res) {
     return res.status(409).send(e.message);
   }
 
-  res.send(newUser); 
+  res.send(newUser);
 }
 
 async function signin(req, res) {
@@ -23,4 +23,15 @@ async function signin(req, res) {
   }
 }
 
-export default { signup, signin };
+async function userLogged(req, res) {
+  const { _id: id } = res.locals.user;
+
+  try {
+    const user = await authService.userLogged(id);
+    return res.send(user);
+  } catch (e) {
+    return res.status(404).send(e.message);
+  }
+}
+
+export default { signup, signin, userLogged };
