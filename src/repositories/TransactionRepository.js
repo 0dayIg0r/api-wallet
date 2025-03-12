@@ -4,4 +4,8 @@ async function create(data) {
   return transactionSchema.create(data);
 }
 
-export default { create };
+async function findAllByUser(id) {
+  return await transactionSchema.find({userId: id})
+}
+
+export default { create, findAllByUser };

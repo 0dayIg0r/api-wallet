@@ -1,15 +1,19 @@
 import jwt from "jsonwebtoken";
 import authRepository from "../repositories/authRepository.js";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export async function authMiddleware(req, res, next) {
   const { authorization } = req.headers;
+  
 
   if (!authorization) {
     return res.status(401).send({ message: "Invalid Token" });
   }
 
   const parts = authorization?.split(" ");
-  if (!parts.length !== 2) {
+  if (parts.length !== 2) {
     return res.status(401).send({ message: "Invalid Token" });
   }
 
@@ -19,9 +23,9 @@ export async function authMiddleware(req, res, next) {
     return res.status(401).send({ message: "Invalid Token" });
   }
 
-  jwt.verify(token, process.env.SECRET, async (e, decode) => {
+  jwt.verify(token, process.env.SECRET_JWT, async (e, decode) => {
     if (e) {
-      return res.status(401).send({ message: "Invalid Token" });
+      return res.status(401).send({ message: "Invalid Token", e: e.message });
     }
 
     if (!decode) {

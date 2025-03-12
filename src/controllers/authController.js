@@ -10,7 +10,7 @@ async function signup(req, res) {
     return res.status(409).send(e.message);
   }
 
-  res.send(newUser);
+  res.send(newUser); 
 }
 
 async function signin(req, res) {
