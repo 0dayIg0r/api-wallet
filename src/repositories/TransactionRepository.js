@@ -5,7 +5,19 @@ async function create(data) {
 }
 
 async function findAllByUser(id) {
-  return await transactionSchema.find({userId: id})
+  return await transactionSchema.find({ userId: id });
 }
 
-export default { create, findAllByUser };
+async function updateTransaction(id, body) {
+  return await transactionSchema.updateOne(
+    { _id: id },
+    {
+      $set: {
+        value: body.value,
+        description: body.description,
+      },
+    }
+  );
+}
+
+export default { create, findAllByUser, updateTransaction };

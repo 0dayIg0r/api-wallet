@@ -16,10 +16,22 @@ async function getAllByUser(req, res) {
   const { _id: id } = res.locals.user;
   try {
     const transactions = await TransactionService.findAllByUser(id);
-    return res.status(200).send(transactions)
+    return res.status(200).send(transactions);
   } catch (e) {
-   return res.status(500).send(e.message);
+    return res.status(500).send(e.message);
   }
 }
 
-export default { create, getAllByUser };
+async function updateTransaction(req, res) {
+  const { id } = req.params;
+  const body = req.body;
+
+  try {
+    const updatedTransaction = TransactionService.updatedT(id, body);
+    res.status(200).send(updatedTransaction);
+  } catch (e) {
+    return res.status(404).send(e.message);
+  }
+}
+
+export default { create, getAllByUser, updateTransaction };
