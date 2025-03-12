@@ -14,6 +14,14 @@ transactionRouter.post(
 );
 transactionRouter.get("/transactions", TransactionController.getAllByUser);
 
-transactionRouter.put('/transactions/:id', TransactionController.updateTransaction )
+transactionRouter.put(
+  "/transactions/:id",
+  TransactionController.updateTransaction
+);
+
+transactionRouter.delete(
+  "/transactions/:id",
+  TransactionController.deleteTransaction
+);
 
 export default transactionRouter;

@@ -34,4 +34,14 @@ async function updateTransaction(req, res) {
   }
 }
 
-export default { create, getAllByUser, updateTransaction };
+async function deleteTransaction(req, res) {
+  const { id } = req.params;
+  try {
+    await TransactionService.deleteT(id);
+    res.status(200).end();
+  } catch (e) {
+    res.status(401).send(e.message);
+  }
+}
+
+export default { create, getAllByUser, updateTransaction, deleteTransaction };

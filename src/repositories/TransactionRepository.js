@@ -20,4 +20,8 @@ async function updateTransaction(id, body) {
   );
 }
 
-export default { create, findAllByUser, updateTransaction };
+async function deleteT(id) {
+  return await transactionSchema.deleteOne({_id: id});
+}
+
+export default { create, findAllByUser, updateTransaction, deleteT };
