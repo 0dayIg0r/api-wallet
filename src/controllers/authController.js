@@ -9,8 +9,6 @@ async function signup(req, res) {
   } catch (e) {
     return res.status(409).send(e.message);
   }
-
-  res.send(newUser);
 }
 
 async function signin(req, res) {
